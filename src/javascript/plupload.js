@@ -1285,12 +1285,14 @@
         
 				for (i = files.length - 1; i >= 0; i--) {
 					if (files[i].id === file.id) {
-						var instance = this;
-						delay(function() {
-							file.status = plupload.FAILED;
-							instance.trigger("CancelUpload");
-							uploadNext.call(instance);
-						}, 1);
+						if (file.status == plupload.UPLOADING) {
+							var instance = this;
+							delay(function() {
+								file.status = plupload.FAILED;
+								instance.trigger("CancelUpload");
+								uploadNext.call(instance);
+							}, 1);
+						}
 						return this.splice(i, 1)[0];
 					}
 				}
