@@ -479,7 +479,7 @@
 			});
 			
 			uploader.bind("CancelUpload", function() {
-				if (xhr.abort) {
+				if (xhr && xhr.abort) {
 					xhr.abort();	
 				}
 			});
